@@ -2,18 +2,19 @@
 #include "big_double.h"
 #include <map>
 
- big_integer gcd(big_integer a, big_integer b) {
-    if (a % b == 0)
+ big_integer gcd(big_integer &a, const big_integer &b) {
+    big_integer c = a % b;
+    if (c == 0)
         return b;
-    if (b % a == 0)
+    if (c == 0)
         return a;
     if (a > b)
-        return gcd(a % b, b);
-    return gcd(a, b % a);
+        return gcd(c, b);
+    return gcd(a, c);
 }
 
-big_integer lcm(big_integer a, big_integer b) {
-    return (a * b) / lcm(a, b);
+big_integer lcm(big_integer &a, const big_integer &b) {
+    return (a * b) / gcd(a, b);
 }
 
 std::string to_decimal(big_integer numerator, big_integer denominator, bool negative) {

@@ -3,9 +3,9 @@
 
 #include "big_integer.h"
 
-big_integer gcd(big_integer a, big_integer b);
+big_integer gcd(big_integer &, const big_integer &);
 
-big_integer lcm(big_integer a, big_integer b);
+big_integer lcm(big_integer &, const big_integer &);
 
 std::string to_decimal(big_integer numerator, big_integer denominator, bool negative);
 
