@@ -8,17 +8,19 @@ int main() {
 
     big_double b("15.0");
 
-    big_double d("0.0");
+    big_double d("2.0");
 
     big_double c = a / b;
 
     std::cout << c << std::endl;
 
-    big_double v = c * b;
+    b += d;
 
     std::cout << (c * b) << std::endl;
 
     std::cout << (d / b) << std::endl;
+
+    std::cout << (-(b)) << std::endl;
 
     return 0;
 }

@@ -9,20 +9,20 @@
 #include <iomanip>
 
 big_double::big_double() {
-    this->negative = false;
+    negative = false;
 }
 
 big_double::big_double(std::string str) {
     if (str.length() == 0) {
-        this->negative = false;
+        negative = false;
     }
     else {
         if (str[0] == '-') {
             str = str.substr(1);
-            this->negative = true;
+            negative = true;
         }
         else {
-            this->negative = false;
+            negative = false;
         }
 
         int point = str.find('.');
@@ -118,4 +118,42 @@ const big_double operator /(const big_double& left, const big_double& right) {
     result.denominator = left.denominator * right.numerator;
     result.negative = left.negative != right.negative;
     return result;
+}
+
+big_double big_double::operator +=(const big_double &number) {
+    return *this = *this + number;
+}
+
+big_double big_double::operator -=(const big_double &number) {
+    return *this = *this - number;
+}
+
+big_double big_double::operator *=(const big_double &number) {
+    return *this = *this - number;
+}
+
+big_double big_double::operator /=(const big_double &number) {
+    return *this = *this - number;
+}
+
+const big_double big_double::operator++() {
+    big_double number("1.0");
+    return (*this += number);
+}
+
+const big_double big_double::operator ++(int) {
+    big_double number("1.0");
+    *this += number;
+    return *this - number;
+}
+
+const big_double big_double::operator --() {
+    big_double number("1.0");
+    return *this -= number;
+}
+
+const big_double big_double::operator --(int) {
+    big_double number("1.0");
+    *this -= number;
+    return *this + number;
 }

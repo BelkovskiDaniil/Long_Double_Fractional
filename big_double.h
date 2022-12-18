@@ -28,6 +28,10 @@ public:
     operator std::string() const;
     const big_double operator +() const;
     const big_double operator -() const;
+    const big_double operator ++();
+    const big_double operator ++(int);
+    const big_double operator --();
+    const big_double operator --(int);
     friend bool operator ==(const big_double&, const big_double&);
     friend bool operator <(const big_double&, const big_double&);
     friend bool operator !=(const big_double&, const big_double&);
@@ -35,9 +39,13 @@ public:
     friend bool operator >(const big_double&, const big_double&);
     friend bool operator >=(const big_double&, const big_double&);
     friend const big_double operator +(big_double, const big_double&);
+    big_double operator +=(const big_double &other);
     friend const big_double operator -(big_double, const big_double&);
+    big_double operator -=(const big_double &other);
     friend const big_double operator *(const big_double&, const big_double&);
+    big_double operator *=(const big_double &other);
     friend const big_double operator /(const big_double&, const big_double&);
+    big_double operator /=(const big_double &other);
 };
 
 #endif //LONG_DOUBLE_BIG_DOUBLE_H

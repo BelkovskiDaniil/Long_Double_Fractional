@@ -5,39 +5,39 @@
 #include <iomanip>
 
 big_integer::big_integer() {
-    this->negative = false;
+    negative = false;
 }
 
 big_integer::big_integer(std::string str) {
     if (str.length() == 0) {
-        this->negative = false;
+        negative = false;
     }
     else {
         if (str[0] == '-') {
             str = str.substr(1);
-            this->negative = true;
+            negative = true;
         }
         else {
-            this->negative = false;
+            negative = false;
         }
 
         for (long long i = str.length(); i > 0; i -= 9) {
             if (i < 9)
-                this->numbers.push_back(atoi(str.substr(0, i).c_str()));
+                numbers.push_back(atoi(str.substr(0, i).c_str()));
             else
-                this->numbers.push_back(atoi(str.substr(i - 9, 9).c_str()));
+                numbers.push_back(atoi(str.substr(i - 9, 9).c_str()));
         }
 
-        this->del_zeroes();
+        del_zeroes();
     }
 }
 
 void big_integer::del_zeroes() {
-    while (this->numbers.size() > 1 && this->numbers.back() == 0) {
-        this->numbers.pop_back();
+    while (numbers.size() > 1 && numbers.back() == 0) {
+        numbers.pop_back();
     }
 
-    if (this->numbers.size() == 1 && this->numbers[0] == 0) this->negative = false;
+    if (numbers.size() == 1 && numbers[0] == 0) negative = false;
 }
 
 std::ostream& operator <<(std::ostream& os, const big_integer& bi) {
@@ -150,11 +150,11 @@ big_integer::operator std::string() const {
 }
 
 big_integer::big_integer(signed int i) {
-    if (i < 0) this->negative = true;
-    else this->negative = false;
-    this->numbers.push_back(std::abs(i) % big_integer::BASE);
+    if (i < 0) negative = true;
+    else negative = false;
+    numbers.push_back(std::abs(i) % big_integer::BASE);
     i /= big_integer::BASE;
-    if (i != 0) this->numbers.push_back(std::abs(i));
+    if (i != 0) numbers.push_back(std::abs(i));
 }
 
 const big_integer big_integer::operator ++(int) {
@@ -213,13 +213,13 @@ big_integer& big_integer::operator *=(const big_integer& value) {
 }
 
 void big_integer::shift() {
-    if (this->numbers.size() == 0) {
-        this->numbers.push_back(0);
+    if (numbers.size() == 0) {
+        numbers.push_back(0);
         return;
     }
-    this->numbers.push_back(this->numbers[this->numbers.size() - 1]);
-    for (size_t i = this->numbers.size() - 2; i > 0; --i) this->numbers[i] = this->numbers[i - 1];
-    this->numbers[0] = 0;
+    numbers.push_back(numbers[numbers.size() - 1]);
+    for (size_t i = numbers.size() - 2; i > 0; --i) numbers[i] = numbers[i - 1];
+    numbers[0] = 0;
 }
 
 const big_integer operator /(const big_integer& left, const big_integer& right) {
